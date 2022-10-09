@@ -7,23 +7,22 @@ class Solution {
         int end = nums.length-1;
         int index = end;
         int[] result = new int[nums.length];
+        
         while(start <= end)
         {
-            if(Math.abs(nums[start]) >= Math.abs(nums[end]))
+            int left = nums[start] * nums[start];
+            int right = nums[end] * nums[end];
+            if(left <= right)
             {
-                double squaredNum = nums[start];
-                result[index] = (int) Math.pow(squaredNum, 2);
-                start++;
+                result[index--] = right;
+                end--;
             }
             else
             {
-               double squaredNum = nums[end];
-                result[index] = (int) Math.pow(squaredNum, 2);
-                end--; 
-            }
-            index--;
+                result[index--] = left;
+                start++;
+            }   
         }
-        
         return result;
     }
 }
