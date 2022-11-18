@@ -1,51 +1,55 @@
 class Solution {
     
-    public boolean isEmpty(int[] arr)
+    
+    public boolean checkIfEmpty(int arr[])
     {
-        for(int i = 0; i < arr.length; i++)
-        {
-            if(arr[i] != 0)
-            {
-                return false;
-            }
-        }
-        return true;
+     for(int i = 0; i< arr.length; i++)
+     {
+         if(arr[i] != 0) return false;
+     }
+        return true;   
     }
+    
     
     public boolean checkInclusion(String s1, String s2) {
         
-       if(s2.length() < s1.length())
-       {
-           return false;
-       }
-        int arr[] = new int[26];
+        if(s2.length() < s1.length() || s1.length() == 0 || s1.length() == 0)
+        {
+            return false;
+        }
         
-        int i = 0,j = 0;
-        for(; i < s1.length(); i++)
+        int[] arr = new int[27];
+        int startIndex = 0;
+       
+        
+        for( int i = 0; i < s1.length() ; i++ )
         {
             arr[s1.charAt(i) - 'a']++;
         }
-
-         for(; j < s1.length(); j++)
+        
+        for( int i = 0; i < s1.length() ; i++ )
         {
-             arr[s2.charAt(j) - 'a']--;
+            arr[s2.charAt(i) - 'a']--;
         }
         
-        if(isEmpty(arr))
+        if(checkIfEmpty(arr))
         {
             return true;
-        }
-        i = 0;
-        for(; j < s2.length(); j++)
+        };
+        
+        for(int i = s1.length(); i< s2.length(); i++)
         {
-            arr[s2.charAt(i) - 'a']++;
-            i++;
-            arr[s2.charAt(j) - 'a']--;
-            if(isEmpty(arr))
+            arr[s2.charAt(startIndex++) - 'a']++;
+            arr[s2.charAt(i) - 'a']--;
+            if(checkIfEmpty(arr))
             {
                 return true;
             }
         }
         return false;
     }
+        
+        
+        
+        
 }
