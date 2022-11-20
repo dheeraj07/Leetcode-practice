@@ -3,23 +3,16 @@ import java.util.HashMap;
 
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-        
-        
-        HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
-        int[] result = new int[2];
+        Map<Integer, Integer> mp = new HashMap<>();
         
         for(int i = 0; i < nums.length; i++)
         {
-            int requiredNumber = target - nums[i];
-            if(hm.containsKey(requiredNumber))
+            if(mp.containsKey(target - nums[i]))
             {
-                result[0] = hm.get(Integer.valueOf(requiredNumber));
-                result[1] = i;
-                return result;
+               return new int[]{i,mp.get(target-nums[i])}; 
             }
-            hm.put(nums[i], i);
+            mp.put(nums[i], i);
         }
-        
-        return result;
+        return null;
     }
 }
