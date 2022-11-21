@@ -1,27 +1,36 @@
 class Solution {
     
-    
-    
-    public Integer getSquaredSum(Integer n)
+    public int checkForHappyNumber(int num)
     {
-        Integer digit = 0;
-        while(n > 0)
+        int sumPower = 0, digit;
+        while(num > 0)
         {
-            digit += (int) Math.pow(n%10,2);
-            n/=10;
+            digit = num%10;
+            num/=10;
+            sumPower += Math.pow(digit, 2);
         }
-        return digit;
+        return sumPower;
     }
     
+  
     
     public boolean isHappy(int n) 
     {
-        Set<Integer> squaredSum = new HashSet<Integer>();
-        Integer sum = 0;
-        while(n != 1 && squaredSum.add(n))
+        Set<Integer> st = new HashSet<>();
+        while(true)
         {
-            n = getSquaredSum(n);
-        }  
-        return n == 1;
+            n = checkForHappyNumber(n);
+            if(!st.add(n))
+            {
+                if(n == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        } 
     }
 }
