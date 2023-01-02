@@ -8,19 +8,21 @@ class Solution {
             {
                 st.push(')');
             }
-            else if(s.charAt(i) == '[')
-            {
-                st.push(']');
-            }
             else if(s.charAt(i) == '{')
             {
-                st.push('}');
+                 st.push('}');
             }
-            else if(st.empty() || !(s.charAt(i) == st.pop()))
+            else if(s.charAt(i) == '[')
+            {
+                 st.push(']');
+            }
+            else if(st.isEmpty() || s.charAt(i) != st.pop())
             {
                 return false;
-            } 
+            }
         }
-        return st.empty();
+        
+        return st.isEmpty();
+        
     }
 }
