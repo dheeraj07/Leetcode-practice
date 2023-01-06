@@ -1,35 +1,23 @@
 class Solution {
     public int characterReplacement(String s, int k) {
+        int maxLen = 0, startPointer = 0, maxCurrCount = 0;
+        int charCount[] = new int[26];
         
-        int windowStart = 0, maxStrLen = 0, charCount, maxCharCount = 0;
-        HashMap<Character, Integer> charOccurence = new HashMap<Character, Integer>();
-        
-        
-        for( int windowEnd = 0; windowEnd < s.length(); windowEnd++)
+        for(int endPointer = 0; endPointer < s.length(); endPointer++)
         {
-            charCount = charOccurence.containsKey(s.charAt(windowEnd)) ? charOccurence.get(s.charAt(windowEnd)) : 0;
-            charOccurence.put(s.charAt(windowEnd), charCount+1);
-            int range = windowEnd - windowStart + 1;
-            maxCharCount = Math.max(maxCharCount, charCount+1);
-            if(range - maxCharCount > k)
+            ++charCount[s.charAt(endPointer) - 'A'];
+            maxCurrCount = Math.max(maxCurrCount, charCount[s.charAt(endPointer) - 'A']);
+            int validRange = endPointer - startPointer + 1;
+            if(validRange - maxCurrCount > k)
             {
-                charCount = charOccurence.get(s.charAt(windowStart))-1;
-                if(charCount == 0)
-                {
-                    charOccurence.remove(s.charAt(windowStart));
-                }
-                else
-                {
-                   charOccurence.put(s.charAt(windowStart), charCount); 
-                }
-                windowStart++;
+                --charCount[s.charAt(startPointer++) - 'A'];
             }
             else
             {
-                maxStrLen = Math.max(range, maxStrLen);
-            } 
+                maxLen = Math.max(maxLen, endPointer - startPointer + 1);
+            }
         }
-        return maxStrLen;
         
+        return maxLen;
     }
 }
