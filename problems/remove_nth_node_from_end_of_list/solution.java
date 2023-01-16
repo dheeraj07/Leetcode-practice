@@ -20,20 +20,17 @@ class Solution {
             return head;
         }
         
-        while(firstP.next != null)
+        for(int i = 0; i <= n; i++)
         {
             firstP = firstP.next;
-            traversal++;
-            if(traversal - track > n)
-            {
-                secondP = secondP.next;
-                track++;
-            }
         }
         
-        
+        while(firstP != null)
+        {
+            firstP = firstP.next;
+            secondP = secondP.next;
+        }
         secondP.next = secondP.next.next;
-        
         return dummy.next;
     }
 }
